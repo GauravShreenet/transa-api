@@ -1,0 +1,49 @@
+# API testing for our transaction histry API's
+# Protocals: http://
+# URL: localhost
+# port: :8000
+# path: api/v1/user or transa
+
+@rootApi = http://localhost:8000/api/v1
+@transApi = http://localhost:8000/api/v1/transa
+@userApi = http://localhost:8000/api/v1/user
+
+
+
+### check server status
+GET http://localhost:8000
+
+
+### transa get api
+GET {{transApi}}
+
+### user get api
+GET {{userApi}}
+
+### user post api
+POST {{userApi}}
+Content-Type: application/json
+
+{
+    "name": "Prem",
+    "email": "a@a.com",
+    "password": "12345"
+}
+
+### login user
+POST {{userApi}}/login
+Content-Type: application/json
+
+{
+    "email": "a@a.com",
+    "password": "12345"
+}
+
+### user post api
+PUT {{userApi}}
+
+### user post api
+PATCH {{userApi}}
+
+### user post api
+DELETE {{userApi}}
