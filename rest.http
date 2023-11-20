@@ -5,7 +5,7 @@
 # path: api/v1/user or transa
 
 @rootApi = http://localhost:8000/api/v1
-@transApi = http://localhost:8000/api/v1/transa
+@transApi = http://localhost:8000/api/v1/transaction
 @userApi = http://localhost:8000/api/v1/user
 
 
@@ -16,6 +16,19 @@ GET http://localhost:8000
 
 ### transa get api
 GET {{transApi}}
+
+### transa post api
+POST {{transApi}}
+Content-Type: application/json
+Authorization: 6552f7f6d42ffc4b719b9e42
+
+{
+    "type": "Income",
+    "date": "2023/11/20",
+    "title": "asda",
+    "amount": "1230"
+}
+
 
 ### user get api
 GET {{userApi}}

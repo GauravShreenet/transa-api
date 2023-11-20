@@ -6,8 +6,7 @@ import cors from 'cors';
 const app = express();
 const PORT = process.env.PORT || 8000;
 
-// routers
-import userRouter from "./src/router/userRouter.js"
+
 
 //middlewares
 app.use(express.json());
@@ -17,6 +16,12 @@ import {connectMongoDb} from './src/router/config/dbConfig.js';
 connectMongoDb();
 
 
+// routers
+import userRouter from "./src/router/userRouter.js"
+import transRouter from "./src/router/transRouter.js"
+
+app.use("/api/v1/user", userRouter);
+app.use("/api/v1/transaction", transRouter);
 
 app.use("/api/v1/transa", (req, res)=> {
     res.json({
@@ -25,7 +30,8 @@ app.use("/api/v1/transa", (req, res)=> {
 });
 
 
-app.use("/api/v1/user", userRouter);
+
+
 
 app.get("/", (req, res)=>{
     res.json({
