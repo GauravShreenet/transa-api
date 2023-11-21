@@ -34,15 +34,15 @@ router.post("/", userAuth, async (req, res)=>{
     })
 });
 
-router.delete("/", async (req, res)=> {
-    const data = req.body;
-    
-    const result = await deleteTrans(data);
+router.delete("/", userAuth, async (req, res)=> {
+    // const data = req.body;
+    const {userId, body} = req
+    const result = await deleteTrans(userId, body);
 
     result?.deletedCount
     ? res.json({
         status: "success",
-        message: "The Transaction has been deleted",
+        message: `${result.deletedCount} Transactions has been deleted`,
     })
     : res.json({
         status: "error",
