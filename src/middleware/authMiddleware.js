@@ -1,4 +1,4 @@
-import { getUserById } from "../router/modules/UserModule.js";
+import { getUserById } from "../router/models/UserModule.js";
 
 export const userAuth = async (req, res, next) => {
     try {

@@ -1,18 +1,22 @@
 import express from 'express';
 
-import { insertTrans } from './modules/TransModule.js';
+import { deleteTrans, getUserTrans, insertTrans } from './models/TransModule.js';
 import { userAuth } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-// router.get("/", async (req, res)=>{
-//     const budgetList = await getBudget();
-//     res.json({
-//         status: "success",
-//         message: "Your Transactions",
-//         budgetList,
-//     });
-// });
+router.get("/", userAuth, async (req, res, next)=>{
+    try {
+        const transList = await getUserTrans(req.userId);
+        res.json({
+            status: "success",
+            message: "Here are the list",
+            transList,
+        })
+    } catch (error) {
+        next(error)
+    }
+});
 
 router.post("/", userAuth, async (req, res)=>{
     console.log(req.body)
@@ -29,5 +33,21 @@ router.post("/", userAuth, async (req, res)=>{
         message: "Error can't add the transaction",
     })
 });
+
+router.delete("/", async (req, res)=> {
+    const data = req.body;
+    
+    const result = await deleteTrans(data);
+
+    result?.deletedCount
+    ? res.json({
+        status: "success",
+        message: "The Transaction has been deleted",
+    })
+    : res.json({
+        status: "error",
+        message: "Error try again",
+    })
+})
 
 export default router;
